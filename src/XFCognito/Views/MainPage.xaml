@@ -9,6 +9,12 @@
         VerticalOptions="CenterAndExpand" 
         Margin="25">
 
+        <Label Text="Authenticate URL"/>
+        <Entry Text="{Binding AuthenticateUrl}" />
+
+        <Label Text="Callback URL" />
+        <Entry Text="{Binding CallbackUrl}"/>
+
         <Label Text="Click the button to log in" />
 
         <Button Text="Login" 

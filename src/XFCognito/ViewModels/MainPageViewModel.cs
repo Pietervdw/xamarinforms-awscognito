@@ -17,6 +17,20 @@ namespace XFCognito.ViewModels
             set => SetProperty(ref _accessToken, value);
         }
 
+        private string _authenticateUrl;
+        public string AuthenticateUrl
+        {
+            get => _authenticateUrl;
+            set => SetProperty(ref _authenticateUrl, value);
+        }
+
+        private string _callbackUrl;
+        public string CallbackUrl
+        {
+            get => _callbackUrl;
+            set => SetProperty(ref _callbackUrl, value);
+        }
+        
         private DelegateCommand _loginCommand;
         public DelegateCommand LoginCommand => _loginCommand ?? (_loginCommand = new DelegateCommand(ExecuteLoginCommand));
 
@@ -24,6 +38,8 @@ namespace XFCognito.ViewModels
         {
             _webAuthenticator = webAuthenticator;
             Title = "AWS Cognito & Xamarin Forms";
+            AuthenticateUrl = "https://myxamarinapp.auth.us-east-1.amazoncognito.com/login?client_id=4jlfe2iki0ucn32uc44clmib3d&response_type=token&scope=email+openid+profile&redirect_uri=myxfcognitoapp://";
+            CallbackUrl = "myxfcognitoapp://";
         }
 
         async void ExecuteLoginCommand()
@@ -31,8 +47,8 @@ namespace XFCognito.ViewModels
             try
             {
                 var results = await _webAuthenticator.AuthenticateAsync(
-                    new Uri("https://myxamarinapp.auth.us-east-1.amazoncognito.com/login?client_id=4jlfe2iki0ucn32uc44clmib3d&response_type=token&scope=email+openid+profile&redirect_uri=myxfcognitoapp://"),
-                    new Uri("myxfcognitoapp://"));
+                    new Uri(AuthenticateUrl),
+                    new Uri(CallbackUrl));
 
                 AccessToken = results?.AccessToken;
             }
