@@ -42,7 +42,7 @@
       </uap:VisualElements>
       <Extensions>
         <uap:Extension Category="windows.protocol">
-          <uap:Protocol Name="myxfcognitoapp"/>
+          <uap:Protocol Name="myapp"/>
         </uap:Extension>
       </Extensions>
     </Application>
