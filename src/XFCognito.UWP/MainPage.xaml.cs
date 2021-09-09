@@ -14,7 +14,9 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Xamarin.Essentials.Interfaces;
 using XFCognito;
+using XFCognito.UWP.Services;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,13 +31,16 @@ namespace XFCognito.UWP
         {
             this.InitializeComponent();
 
-            LoadApplication(new XFCognito.App(new iOSInitializer()));
+            LoadApplication(new XFCognito.App(new UWPInitializer()));
         }
 
 
-        public class iOSInitializer : IPlatformInitializer
+        public class UWPInitializer : IPlatformInitializer
         {
-            public void RegisterTypes(IContainerRegistry containerRegistry) { }
+            public void RegisterTypes(IContainerRegistry containerRegistry)
+            {
+                containerRegistry.RegisterSingleton<IWebAuthenticator, ExternalWebAuthenticator>();
+            }
         }
     }
 }

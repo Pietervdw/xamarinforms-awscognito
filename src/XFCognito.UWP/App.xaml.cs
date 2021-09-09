@@ -14,6 +14,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Xamarin.Essentials;
+using XFCognito.UWP.Services;
 
 namespace XFCognito.UWP
 {
@@ -97,6 +99,18 @@ namespace XFCognito.UWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args.Kind == ActivationKind.Protocol && 
+                ExternalWebAuthenticator.BrowserAuthenticationTaskCompletionSource != null)
+            {
+                var protocolArgs = args as ProtocolActivatedEventArgs;
+                var url = new Uri(protocolArgs.Uri.AbsoluteUri);
+                var authenticationResult = new WebAuthenticatorResult(url);
+                ExternalWebAuthenticator.BrowserAuthenticationTaskCompletionSource.SetResult(authenticationResult);
+            }
         }
     }
 }

@@ -24,7 +24,10 @@ namespace XFCognito
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IWebAuthenticator, WebAuthenticatorImplementation>();
+            if (!containerRegistry.IsRegistered<IWebAuthenticator>())
+            {
+                containerRegistry.RegisterSingleton<IWebAuthenticator, WebAuthenticatorImplementation>();
+            }
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
         }
