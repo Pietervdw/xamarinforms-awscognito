@@ -38,7 +38,7 @@ namespace XFCognito.ViewModels
         {
             _webAuthenticator = webAuthenticator;
             Title = "AWS Cognito & Xamarin Forms";
-            AuthenticateUrl = "https://myxamarinapp.auth.us-east-1.amazoncognito.com/login?client_id=4jlfe2iki0ucn32uc44clmib3d&response_type=token&scope=email+openid+profile&redirect_uri=myxfcognitoapp://";
+            AuthenticateUrl = "https://vuleinip.auth.us-east-2.amazoncognito.com/login?client_id=5d55renrdia8r2cg2hocmn98me&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=myxfcognitoapp://";
             CallbackUrl = "myxfcognitoapp://";
         }
 
